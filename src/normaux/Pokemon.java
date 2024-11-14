@@ -2,21 +2,22 @@ package normaux;
 
 import java.util.Random;
 
-public class Pokemon0 {
+public abstract class Pokemon {
 	private String nom;
 	protected int hp;
 	private int atk;
 	private int niveau;
 	private static int niveauMax=10;
-	//private TypePokemon type;
+	private TypePokemon type;
 	private static Random random=new Random();
 	
 	
-	public Pokemon0(String nom) {
+	public Pokemon(String nom, TypePokemon type) {
 		this.nom=nom;
 		niveau= random.nextInt(1,niveauMax);
 		hp=2*niveau;
 		atk=(niveau/2)+1;
+		this.type=type;
 	}
 
 	public String getNom() {
@@ -51,10 +52,8 @@ public class Pokemon0 {
 		log("Hmmm! Je vais mieux, merci !");
 		
 	}
-	public void attaquer(Pokemon0 p) {
-		p.hp-=atk;
-		log(p.getNom()+" je t'attaque à "+atk+" !");
-	}
+	public abstract void subir(Pokemon p);
+	public abstract void attaquer(Pokemon p);
 	@Override
 	public String toString() {
 		return ("\n-- "+nom+" --\n"+" hp -- "+hp+"\n atk -- "+atk+"\n niveau -- "+niveau);
